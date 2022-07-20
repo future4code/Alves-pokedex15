@@ -3,9 +3,12 @@ import axios from 'axios'
 import { StyledCard } from './Styled'
 import { StyledButtom } from './Styled'
 import { BASE_URL } from '../../consts/BASE_URL'
+import { useNavigate } from 'react-router-dom'
+import {goDetails} from '../Routes/coordinator'
 
 export default function PokeCard() {
 
+    const navigate = useNavigate()
     const [listaPoke, setListaPoke] = useState([])
     const [pokeList, setPokeList] = useState([])
 
@@ -14,7 +17,7 @@ export default function PokeCard() {
     }, [])
 
     useEffect (() => {
-        pegaPokemons()
+        detalhePokes()
     }, [listaPoke.length === 20])
 
     const pegaPokemons = () =>{
@@ -28,25 +31,45 @@ export default function PokeCard() {
         })
     }
 
-    const detalhePokes = () =>{
-        listaPoke.forEach((poke)=>{
-           axios.get(poke.url)
-           .then((res)=>{console.log(res)})
-           .catch((erro)=>{console.log(erro.response)})
-       }) 
-       }
+    const detalhePokes = () => {
 
-    return (
+        const lista = []
+        listaPoke.forEach((poke) => {
+            axios.get(poke.url)
+                .then((res) => {
+                    lista.push(res)
+                    if (lista.length === 20) {
+                        setPokeList(lista)
+                    }
+                    console.log(lista[0].data)
+                })
+                .catch((erro)=>{console.log(erro)})
+        })
+    }
 
-        <StyledCard>
+    const pokemon = pokeList.map((poke)=>{
+        return(
+            <StyledCard key={poke.data.species.name}>
             <figure>
-                <img src='https://i.picsum.photos/id/870/200/200.jpg?hmac=G4IaFUfMAbn5JlMY8wZINYyI9gol9fXYZXdaVEF5Jzg' />
+                <img src={poke.data.sprites.other.dream_world.front_default} />
             </figure>
-            <h5>pokemon</h5>
+            <h5>{poke.data.species.name}</h5>
+            {poke.data.types.map((type)=>{
+                return(
+                    <p key={type.type.name}>{type.type.name}</p>
+                )
+            })}
             <StyledButtom>
-                <button onClick={detalhePokes}>Detalhes</button>
+                <button onClick={() =>{goDetails(navigate)}}>Detalhes</button>
                 <button>Capturar</button>
             </StyledButtom>
         </StyledCard>
+        )
+    })
+
+    return (
+        <div>
+            {pokemon}
+        </div>
     )
-}
+    }
