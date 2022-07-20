@@ -6,32 +6,35 @@ import { BASE_URL } from '../../consts/BASE_URL'
 
 export default function PokeCard() {
 
-    const [listaPoke, setListaPoke] = useState({})
+    const [listaPoke, setListaPoke] = useState([])
     const [pokeList, setPokeList] = useState([])
 
     useEffect (() => {
         pegaPokemons()
     }, [])
 
-    
+    useEffect (() => {
+        pegaPokemons()
+    }, [listaPoke.length === 20])
 
     const pegaPokemons = () =>{
         axios.get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
         .then((res)=>{
+            console.log(res.data.results)
             setListaPoke(res.data.results)
         })
         .catch((erro)=>{
-            console.log(erro.response)
+            console.log(erro)
         })
     }
 
-    console.log(listaPoke)
-
-    listaPoke.forEach((poke)=>{
-        axios.get(poke.url)
-        .then((res)=>{console.log(res)})
-        .catch((erro)=>{console.log(erro.response)})
-    })
+    const detalhePokes = () =>{
+        listaPoke.forEach((poke)=>{
+           axios.get(poke.url)
+           .then((res)=>{console.log(res)})
+           .catch((erro)=>{console.log(erro.response)})
+       }) 
+       }
 
     return (
 
@@ -41,7 +44,7 @@ export default function PokeCard() {
             </figure>
             <h5>pokemon</h5>
             <StyledButtom>
-                <button>Detalhes</button>
+                <button onClick={detalhePokes}>Detalhes</button>
                 <button>Capturar</button>
             </StyledButtom>
         </StyledCard>
