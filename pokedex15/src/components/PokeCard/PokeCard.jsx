@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import { StyledCard } from './Styled'
+import { StyledCard, StyleImg, ImgButton, PokeButton, DivPai } from './Styled'
 import { StyledButtom } from './Styled'
 import { BASE_URL } from '../../consts/BASE_URL'
 import { useNavigate } from 'react-router-dom'
 import {goDetails} from '../Routes/coordinator'
+import pokebola from '../Assets/Img/pokebola.png'
 
 export default function PokeCard() {
 
@@ -50,9 +51,9 @@ export default function PokeCard() {
     const pokemon = pokeList.map((poke)=>{
         return(
             <StyledCard key={poke.data.species.name}>
-            <figure>
-                <img src={poke.data.sprites.other.dream_world.front_default} />
-            </figure>
+            
+                <StyleImg src={poke.data.sprites.other.dream_world.front_default} />
+           
             <h5>{poke.data.species.name}</h5>
             {poke.data.types.map((type)=>{
                 return(
@@ -61,15 +62,17 @@ export default function PokeCard() {
             })}
             <StyledButtom>
                 <button onClick={() =>{goDetails(navigate)}}>Detalhes</button>
-                <button>Capturar</button>
+                <PokeButton>
+                    <ImgButton src={pokebola}/>
+                </PokeButton>
             </StyledButtom>
         </StyledCard>
         )
     })
 
     return (
-        <div>
+        <DivPai>
             {pokemon}
-        </div>
+        </DivPai>
     )
     }
