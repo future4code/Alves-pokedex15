@@ -10,6 +10,7 @@ const StyleFatherContainer = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 0;
 `
 
 const StyleLogo = styled.img`
