@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import logoPokemon from '../Assets/Img/logoPokemon.png'
-import { goPokedex } from '../Routes/coordinator.js'
+import { goPokedex, goBack } from '../Routes/coordinator.js'
 
 const StyleFatherContainer = styled.div`
   background: linear-gradient(gray, midnightBlue);
@@ -23,6 +23,9 @@ export default function Header() {
 
   return (
     <StyleFatherContainer>
+      <div>
+      <button onClick={() => goBack(navigate)}>Voltar</button>
+      </div>
       <StyleLogo src={logoPokemon} />
       <div>
         <button onClick={() => goPokedex(navigate)}>Pokedex</button>
