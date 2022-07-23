@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import { StyledCard, StyleImg, ImgButton, PokeButton, DivPai } from './Styled'
+import { 
+    StyledCard,
+    StyleImg,
+    CapImgButton,
+    PokeButton,
+    DivPai,
+    DetailButton,
+    DetailImgButton,
+    ContainerImgPoke
+     } from './Styled'
 import { StyledButtom } from './Styled'
 import { BASE_URL } from '../../consts/BASE_URL'
 import { useNavigate } from 'react-router-dom'
 import { goDetails } from '../Routes/coordinator'
 import pokebola from '../Assets/Img/pokebola.png'
+import pokedex1 from '../Assets/Img/pokedex1.png'
+import GlobalContext from '../../Global/GlobalContext'
+
 
 export default function PokeCard() {
 
@@ -13,6 +25,17 @@ export default function PokeCard() {
     const [listaPokeHome, setlistaPokeHome] = useState([])
     const [pokeList, setPokeList] = useState([])
     const [pokedex, setPokedex] = useState([])
+    const {setPoke} = useContext(GlobalContext)
+    const [pokeHome, setPokeHome] = useState()
+
+    const filtraPokemons = () => {
+        const lista = pokeList.filter((poke) =>{
+            if(poke.data.species.name !== pokedex.poke.data.species.name){
+                return poke
+            } 
+            setPokeHome(lista)
+        })
+    }
 
     useEffect(() => {
         pegaPokemons()
@@ -73,7 +96,7 @@ export default function PokeCard() {
 
     const capturarPokemon = (poke) => {
         setPokedex([...pokedex, poke ])
-           
+           localStorage.splice(JSON.stringify(poke))
     }
     
     console.log(pokedex)
@@ -81,25 +104,29 @@ export default function PokeCard() {
     const pokemon = pokeList.map((poke) => {
         return (
             <StyledCard key={poke.data.species.name}>
-
-                <StyleImg src={poke.data.sprites.other.dream_world.front_default} />
+                <ContainerImgPoke>
+                    <StyleImg src={poke.data.sprites.other.dream_world.front_default} />
+                </ContainerImgPoke>
 
                 <h5>{poke.data.species.name}</h5>
                 {poke.data.types.map((type) => {
                     return (
-                        <p key={type.type.name}>{type.type.name}</p>
+                        <div>
+                            <p key={type.type.name}>{type.type.name}</p>
+                        </div>
                     )
                 })}
                 <StyledButtom>
-                    <button onClick={() => { goDetails(navigate) }}>Detalhes</button>
+                    <DetailButton onClick={() => { goDetails(navigate, setPoke, poke) }}>
+                        <DetailImgButton src={pokedex1} />
+                    </DetailButton>
                     <PokeButton onClick={() => capturarPokemon(poke)}>
-                        <ImgButton src={pokebola} />
+                        <CapImgButton src={pokebola} />
                     </PokeButton>
                 </StyledButtom>
             </StyledCard>
         )
     })
-
     return (
         <DivPai>
             {pokemon}
