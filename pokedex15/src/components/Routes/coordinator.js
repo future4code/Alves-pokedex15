@@ -1,12 +1,10 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-
 export const goHome = navigate => {
   navigate('/home')
 }
 
-export const goDetails = navigate => {
+export const goDetails = (navigate, setPoke, poke) => {
   navigate('/detalhes')
+  setPoke(poke)
 }
 
 export const goPokedex = navigate => {
