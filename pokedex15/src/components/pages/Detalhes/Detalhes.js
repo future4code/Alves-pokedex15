@@ -5,7 +5,7 @@ import GlobalContext from '../../../Global/GlobalContext'
 
 export default function Detalhes() {
   const { poke } = useContext(GlobalContext)
-
+  
   return (
     <div>
       <div key={poke.data.species.name}>
