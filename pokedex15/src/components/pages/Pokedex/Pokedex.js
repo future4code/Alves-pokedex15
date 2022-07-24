@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import pokedex1 from '../../Assets/Img/pokedex1.png'
+import liberar from '../../Assets/Img/liberar.png'
 import { goDetails } from '../../Routes/coordinator'
 import GlobalContext from '../../../Global/GlobalContext'
 import {
@@ -11,6 +12,22 @@ import {
   ContainerImgPoke,
   StyledButtom
 } from '../../PokeCard/Styled'
+import styled from 'styled-components'
+
+const LiberarButton = styled.div``
+
+const LiberarImg = styled.img`
+  width: 50px;
+  height: 50px;
+  &:hover {
+    animation: StyleImg 0.3s linear both;
+    @keyframes StyleImg {
+      100% {
+        transform: scale(1.5);
+      }
+    }
+  }
+`
 
 export default function Pokedex() {
   const [pokes, setPokes] = useState([])
@@ -51,7 +68,13 @@ export default function Pokedex() {
             onClick={() => { goDetails(navigate, setPoke, poke) }}>
             <DetailImgButton src={pokedex1}/>
           </DetailButton>
+
           <button onClick={()=> liberarPoke(poke)}>Liberar</button>
+
+          <LiberarButton>
+            <LiberarImg src={liberar} />
+          </LiberarButton>
+
         </StyledButtom>
       </StyledCard>
     )
