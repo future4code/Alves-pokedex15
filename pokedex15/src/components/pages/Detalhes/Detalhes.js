@@ -13,11 +13,6 @@ import GlobalContext from '../../../Global/GlobalContext'
 export default function Detalhes() {
   const { poke } = useContext(GlobalContext)
 
-  console.log(poke)
-
-  const stats = poke.data.stats.map(item => <p>{item.base_stat}</p>)
-  const nameStats = poke.data.stats.map(item => <p>{item.stat.name}</p>)
-
   return (
     <StyleDivPai>
       <ContainerDetails key={poke.data.species.name}>
