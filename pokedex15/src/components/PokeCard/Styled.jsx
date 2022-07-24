@@ -8,6 +8,7 @@ justify-content: center;
 `
 
 export const StyledCard = styled.div`
+background-color: #729F92;
 display: flex;
 justify-content: center;
 flex-direction: column;
@@ -19,7 +20,6 @@ align-items: center;
  padding: 10px;
  margin: 10px 25px 10px 25px;
  border-radius: 10px;
- background-color: #729F92;
  &:hover {
     animation: StyledCard 0.3s linear both;
     @keyframes StyledCard {
