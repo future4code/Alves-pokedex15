@@ -1,16 +1,18 @@
 # POKEDEX
 
 Nome dos integrantes: 
-- Pessoa 1
-- Pessoa 2
-- Pessoa 3
+- Gabriel Dos Santos
+- Rafael Garcia
+- Pedro Emanuel
 
-Link do Surge: www.link.com.br
+Link do Surge: https://pokedex-15.surge.sh/
 
 O que funciona:
-- Item 1
-- Item 2
+- Os pokemons ao serem capturados somem da Home e aparecem na pokedex, más ao atualizar página eles reaparecem.
+- Os botões estão funcionando perfeitamente.
 
 O que não funciona: 
-- Item 3
-- Item 4
+- Ao atulizar a pagina os dados salvos se perdem.
+- A pagina de detalhes após atualizada quebra. 
+- A Pokedex ainda esta sem estilização.
+-
