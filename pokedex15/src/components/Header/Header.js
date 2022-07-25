@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import logo from '../Assets/Img/Logo.png'
 import { goPokedex, goBack } from '../Routes/coordinator.js'
+import pokegif from '../Assets/Img/pokegif.gif'
+
+const PokeGif = styled.img`
+  width: 300px;
+  height: 300px;
+`
 
 const StyleFatherContainer = styled.div`
   background-color: red;
@@ -27,8 +33,8 @@ export default function Header() {
         <button onClick={() => goBack(navigate)}>Voltar</button>
       </div>
       <StyleLogo src={logo} />
-      <div>
-        <button onClick={() => goPokedex(navigate)}>Pokedex</button>
+      <div onClick={() => goPokedex(navigate)}>
+        <PokeGif src={pokegif} />
       </div>
     </StyleFatherContainer>
   )

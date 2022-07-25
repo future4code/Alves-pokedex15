@@ -11,10 +11,14 @@ import {
   DetailImgButton,
   ContainerImgPoke,
   StyledButtom
-} from '../../PokeCard/Styled'
+} from '../../PokeHome/Styled'
 import styled from 'styled-components'
 
 const LiberarButton = styled.div``
+
+const ContainerPokedex = styled.div`
+  background: linear-gradient(red, yellow);
+`
 
 const LiberarImg = styled.img`
   width: 50px;
@@ -33,57 +37,54 @@ export default function Pokedex() {
   const [pokes, setPokes] = useState([])
   const { setPoke } = useContext(GlobalContext)
   const navigate = useNavigate()
-
   useEffect(() => {
     setPokes(JSON.parse(localStorage.getItem('pokedex')))
   }, [])
 
-  const liberarPoke = (poke)=>{
+  const liberarPoke = poke => {
     let lista = pokes
-    let novaLista = lista.filter((item)=>{
-        if(item.data.name !== poke.data.name){
-        return item}
-       })
-       localStorage.setItem("pokedex", JSON.stringify(novaLista))
-       setPokes(novaLista)
+    let novaLista = lista.filter(item => {
+      if (item.data.name !== poke.data.name) {
+        return item
+      }
+    })
+    localStorage.setItem('pokedex', JSON.stringify(novaLista))
+    setPokes(novaLista)
   }
 
   const pokemon = pokes?.map(poke => {
     return (
-      <StyledCard key={poke.data.name}>
-        <ContainerImgPoke>
-          <StyleImg src={poke.data.sprites.other.dream_world.front_default} />
-        </ContainerImgPoke>
+      <div>
+        <StyledCard key={poke.data.name}>
+          <ContainerImgPoke>
+            <StyleImg src={poke.data.sprites.other.dream_world.front_default} />
+          </ContainerImgPoke>
 
-        <h5>{poke.data.species.name}</h5>
-        {poke.data.types.map(type => {
-          return (
-            <div key={poke.data.name}>
-              <p key={type.type.name}>{type.type.name}</p>
-            </div>
-          )
-        })}
-        <StyledButtom>
-          <DetailButton
-            onClick={() => { goDetails(navigate, setPoke, poke) }}>
-            <DetailImgButton src={pokedex1}/>
-          </DetailButton>
+          <h5>{poke.data.species.name}</h5>
+          {poke.data.types.map(type => {
+            return (
+              <div key={poke.data.name}>
+                <p key={type.type.name}>{type.type.name}</p>
+              </div>
+            )
+          })}
+          <StyledButtom>
+            <DetailButton
+              onClick={() => {
+                goDetails(navigate, setPoke, poke)
+              }}
+            >
+              <DetailImgButton src={pokedex1} />
+            </DetailButton>
 
-          <button onClick={()=> liberarPoke(poke)}>Liberar</button>
-
-          <LiberarButton>
-            <LiberarImg src={liberar} />
-          </LiberarButton>
-
-        </StyledButtom>
-      </StyledCard>
+            <LiberarButton onClick={() => liberarPoke(poke)}>
+              <LiberarImg src={liberar} />
+            </LiberarButton>
+          </StyledButtom>
+        </StyledCard>
+      </div>
     )
   })
 
-  return (
-    <div>
-      <h1>POKEDEX</h1>
-      {pokemon ? pokemon : <h1>Vazio</h1>}
-    </div>
-  )
+  return <div>{pokemon ? pokemon : <h1>Sua Pokedex esta Vazia</h1>}</div>
 }

@@ -4,7 +4,6 @@ export const StyleDivPai = styled.div`
   height: 100vh;
   display: flex;
   background: linear-gradient(red, yellow);
-  border: 1px solid black;
 `
 
 export const ContainerDetails = styled.div`
@@ -26,18 +25,22 @@ export const ContainerPowers = styled.div`
   border: 1px solid black;
   margin: 50px;
   width: 500px;
+  height: 600px;
   background-color: gray;
   display: flex;
   justify-content: center;
   border-radius: 10px;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
 `
 
 export const StyleAttaks = styled.div`
   border: 1px solid black;
   display: flex;
   width: 300px;
+  height: 400px;
   background-color: yellow;
   margin: 50px;
   border-radius: 10px;

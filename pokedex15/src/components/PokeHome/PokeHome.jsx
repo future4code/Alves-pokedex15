@@ -18,7 +18,7 @@ import pokebola from '../Assets/Img/pokebola.png'
 import pokedex1 from '../Assets/Img/pokedex1.png'
 import GlobalContext from '../../Global/GlobalContext'
 
-export default function PokeCard() {
+export default function PokeHome() {
 
     const navigate = useNavigate()
     const [listaPokeHome, setlistaPokeHome] = useState([])
